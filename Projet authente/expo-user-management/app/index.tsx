@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { supabase } from './lib/supabase'
-import Auth from './components/Auth'
-import Account from './components/Account'
-import { View } from 'react-native'
+import { supabase } from '../lib/supabase'
+import Auth from '../components/Auth'
+import Account from '../components/Account'
+import { View, ScrollView } from 'react-native'
 import { Session } from '@supabase/supabase-js'
 
 export default function App() {
@@ -19,8 +19,8 @@ export default function App() {
   }, [])
 
   return (
-    <View>
+    <ScrollView>
       {session && session.user ? <Account key={session.user.id} session={session} /> : <Auth />}
-    </View>
+    </ScrollView>
   )
 }

@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-import { StyleSheet, View, Alert } from 'react-native'
+import { StyleSheet, View, ScrollView, Alert, Pressable, Text } from 'react-native'
 import { Button, Input } from '@rneui/themed'
 import { Session } from '@supabase/supabase-js'
 import Avatar from './Avatar'
+import { Link, useNavigation, useRouter } from 'expo-router'
+
 
 export default function Account({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState('')
   const [website, setWebsite] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')
+  const navigation = useNavigation();
+  const router = useRouter();
 
   useEffect(() => {
     if (session) getProfile()
@@ -80,7 +84,7 @@ export default function Account({ session }: { session: Session }) {
 
   return (
     
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
         <View>
       <Avatar
         size={200}
@@ -100,7 +104,10 @@ export default function Account({ session }: { session: Session }) {
       <View style={styles.verticallySpaced}>
         <Input label="Website" value={website || ''} onChangeText={(text) => setWebsite(text)} />
       </View>
-
+      <Button
+        title="Accéder à l'application"
+        onPress={() => router.push("/Home")}
+      />
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
           title={loading ? 'Loading ...' : 'Update'}
@@ -108,19 +115,18 @@ export default function Account({ session }: { session: Session }) {
           disabled={loading}
         />
       </View>
-
       <View style={styles.verticallySpaced}>
         <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
       </View>
       
-    </View>
+    </ScrollView>
     
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
+    marginTop: 1,
     padding: 12,
   },
   verticallySpaced: {
