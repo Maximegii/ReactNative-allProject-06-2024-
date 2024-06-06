@@ -10,11 +10,13 @@ export default function TabLayout() {
           <Image source={require('./../../assets/home.png')} style={{ width: 20, height: 20}} />
         )
        }}/>
-       <Tabs.Screen name="panier" options={{ title: "Panier",
+       <Tabs.Screen name="Add" options={{ title: "Ajouter",
        tabBarIcon: () => (
-          <Image source={require('./../../assets/panier.png')} style={{ width: 20, height: 20}} />
+          <Image source={require('./../../assets/add.png')} style={{ width: 20, height: 20}} />
         )
        }} />
+       
+      
        
        
     </Tabs>
